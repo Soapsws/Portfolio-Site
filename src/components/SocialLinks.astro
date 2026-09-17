@@ -1,0 +1,48 @@
+---
+import linkedinIcon from '../assets/linkedin-color-svgrepo-com.svg';
+import youtubeIcon from '../assets/youtube.svg';
+import xIcon from '../assets/x.svg';
+import githubIcon from '../assets/github.svg';
+---
+
+<nav class="social-links" aria-label="Social links">
+	<a href="https://www.linkedin.com/in/yichensun0/" aria-label="LinkedIn">
+		<img src={linkedinIcon.src} alt="" />
+	</a>
+	<a href="https://www.youtube.com/@7solox" aria-label="YouTube">
+		<img src={youtubeIcon.src} alt="" />
+	</a>
+	<a href="https://x.com/GaseousSoap" aria-label="X">
+		<img src={xIcon.src} alt="" />
+	</a>
+	<a href="https://github.com/Soapsws" aria-label="GitHub">
+		<img src={githubIcon.src} alt="" />
+	</a>
+</nav>
+
+<style>
+	.social-links {
+		display: flex;
+		align-items: center;
+		gap: 2.3rem;
+		height: 3.9rem;
+	}
+
+	.social-links a {
+		display: grid;
+		place-items: center;
+		width: 2.9rem;
+		height: 2.9rem;
+		transition: opacity 0.2s ease;
+	}
+
+	.social-links a:hover,
+	.social-links a:focus-visible {
+		opacity: 0.75;
+	}
+
+	.social-links img {
+		width: 2rem;
+		height: 2rem;
+	}
+</style>

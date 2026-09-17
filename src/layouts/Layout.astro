@@ -1,3 +1,9 @@
+---
+import ContactInfo from '../components/ContactInfo.astro';
+import SocialLinks from '../components/SocialLinks.astro';
+import SelectionBar from '../components/SelectionBar.astro';
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
@@ -6,18 +12,63 @@
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>Portfolio</title>
 	</head>
 	<body>
+		<div class="top-row">
+			<SocialLinks />
+			<SelectionBar />
+			<div class="contact-slot">
+				<ContactInfo />
+			</div>
+		</div>
 		<slot />
 	</body>
 </html>
 
 <style>
+	:root {
+		background: #171a1f;
+		color: #e8e5df;
+	}
+
 	html,
 	body {
 		margin: 0;
 		width: 100%;
 		height: 100%;
+		background: #171a1f;
+	}
+
+	body {
+		min-height: 100%;
+	}
+
+	.top-row {
+		display: grid;
+		grid-template-columns: 26rem minmax(0, 1fr) 26rem;
+		align-items: center;
+		gap: 1.3rem;
+		padding: 1.3rem;
+	}
+
+	.top-row > :global(.social-links) {
+		justify-self: center;
+	}
+
+	.contact-slot {
+		min-width: 0;
+	}
+
+	@media (max-width: 1400px) {
+		.top-row {
+			grid-template-columns: 1fr;
+			justify-items: center;
+			gap: 0.75rem;
+		}
+
+		.contact-slot {
+			min-height: 0;
+		}
 	}
 </style>

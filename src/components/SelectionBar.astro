@@ -1,0 +1,32 @@
+<header class="selection-bar">
+	<nav aria-label="Project and showcase navigation">
+		<slot />
+	</nav>
+</header>
+
+<style>
+	.selection-bar {
+		width: 100%;
+		min-height: 4.5rem;
+		margin: 0 auto;
+		box-sizing: border-box;
+		border: 1px solid rgba(5, 7, 10, 0.8);
+		border-radius: 1rem;
+		background: rgba(10, 12, 16, 0.35);
+		padding: 0.8rem 1.6rem;
+		overflow-x: auto;
+	}
+
+	nav {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		min-width: max-content;
+	}
+
+	@media (max-width: 800px) {
+		.selection-bar {
+			width: calc(100% - 2rem);
+		}
+	}
+</style>
