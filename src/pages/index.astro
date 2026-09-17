@@ -5,7 +5,94 @@ import Layout from '../layouts/Layout.astro';
 <Layout>
 	<main class="section-content">
 		<section id="home-panel" data-section-panel="home">
-			<h1>Home</h1>
+			<article class="home-page">
+				<header class="home-intro">
+					<h1>Hi, I’m Yichen.</h1>
+					<p>I’m a first-year CS undergrad at the University of Illinois Urbana-Champaign.</p>
+				</header>
+
+				<section class="home-section">
+					<div class="home-copy">
+						<p>
+							I’ve been coding since high school, but my passion for the field only really ignited
+							the summer after 11th grade.
+						</p>
+						<p>
+							In this time, I’ve gone through several deep-dives into topics that momentarily
+							sparked my interest. Although I have a tendency to drop projects that no longer seem
+							novel, I have accumulated several narrow interests over many investment cycles.
+						</p>
+					</div>
+				</section>
+
+				<section class="home-section">
+					<div class="home-copy">
+						<p>
+							I am fascinated by AI, its applications, and its development. I am also a fan of
+							robotics, no doubt influenced by my time on my high school’s FRC team.
+						</p>
+						<p>
+							Together, these curiosities have nudged me in the direction of{' '}
+							<em>robotic and agentic swarm intelligence</em>,{' '}
+							<em>distributed cognition</em>, and{' '}
+							<em>emergent collaborative tendencies of artificial life forms</em>.
+						</p>
+					</div>
+				</section>
+
+				<section class="home-section">
+					<div class="home-copy">
+						<p>
+							The most direct application of these concepts is in my project{' '}
+							<em>Emergent World</em>. It is a culmination of multiple attempts at simulating
+							swarm intelligence with naive heuristics and pathfinding algorithms—ant-colony
+							optimization and Dijkstra’s algorithm—and now uses neural networks trained on data
+							collected from a custom-written environment.
+						</p>
+					</div>
+				</section>
+
+				<section class="home-section">
+					<div class="home-copy">
+						<p>
+							On the side, I’ve also been exploring tools and applications for{' '}
+							<a href="https://powerline.io">powerline.io</a>,{' '}my favorite browser game, which
+							I have been playing for more than six years. A Mac keybinder that emulates the
+							mobile application can be found on my{' '}
+							<a href="https://github.com/Soapsws">GitHub</a>.
+						</p>
+						<p>
+							More recently, I have been planning an AI agent that can play the game better than
+							built-in bots using local algorithms.
+						</p>
+					</div>
+				</section>
+
+				<section class="home-section">
+					<div class="home-copy">
+						<p>
+							It’s my first semester at UIUC, and I am excited to engage with the many
+							opportunities it offers.
+						</p>
+						<p class="editorial-note">TBD — conditional projects</p>
+					</div>
+				</section>
+
+				<section class="home-section">
+					<div class="home-copy">
+						<p>
+							I also enjoy creative writing. I have spent many years worldbuilding, tracing back
+							to elementary school. However, it is only recently that I gained the literary tools,
+							time, and confidence to put my ideas onto paper.
+						</p>
+						<p>
+							I’m currently working on the world of the upcoming webnovel{' '}
+							<em>Nameless Harvestman</em>. You can also read some of my personal ramblings and
+							thoughts in the personal essays section.
+						</p>
+					</div>
+				</section>
+			</article>
 		</section>
 
 		<section
@@ -37,12 +124,91 @@ import Layout from '../layouts/Layout.astro';
 <style>
 	.section-content {
 		width: min(76rem, calc(100% - 2.6rem));
-		margin: 3rem auto;
+		margin: 4rem auto 6rem;
 	}
 
-	h1 {
+	.home-page {
+		display: grid;
+		gap: 3rem;
+	}
+
+	.home-intro {
+		max-width: 46rem;
+	}
+
+	.home-intro h1 {
 		margin: 0;
 		font-size: clamp(2rem, 5vw, 4rem);
 		font-weight: 500;
+		letter-spacing: -0.04em;
+	}
+
+	.home-intro p {
+		margin: 1rem 0 0;
+		color: #aaa7a0;
+		font-size: clamp(1rem, 2vw, 1.25rem);
+		line-height: 1.5;
+	}
+
+	.home-section {
+		display: grid;
+		grid-template-columns: minmax(0, 44rem) minmax(0, 1fr);
+		gap: 2.5rem;
+	}
+
+	.home-copy {
+		font-size: clamp(1rem, 1.4vw, 1.15rem);
+		line-height: 1.8;
+	}
+
+	.home-copy p {
+		margin: 0;
+	}
+
+	.home-copy p + p {
+		margin-top: 1.3rem;
+	}
+
+	.home-copy a {
+		color: #9dbbd1;
+		text-underline-offset: 0.2em;
+		white-space: nowrap;
+	}
+
+	.editorial-note {
+		color: #777980;
+		font-size: 0.8em;
+		font-style: italic;
+	}
+
+	/* Future images can be inserted as a direct child of any .home-section using this class. */
+	.home-section :global(.media-block) {
+		grid-column: 2;
+		margin: 0;
+	}
+
+	.home-section :global(.media-block img) {
+		display: block;
+		width: 100%;
+		height: auto;
+		border-radius: 0.75rem;
+	}
+
+	@media (max-width: 800px) {
+		.section-content {
+			margin-top: 2.5rem;
+		}
+
+		.home-page {
+			gap: 2rem;
+		}
+
+		.home-section {
+			grid-template-columns: 1fr;
+		}
+
+		.home-section :global(.media-block) {
+			grid-column: 1;
+		}
 	}
 </style>
