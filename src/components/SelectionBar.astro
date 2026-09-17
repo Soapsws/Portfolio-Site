@@ -40,6 +40,16 @@
 		>
 			Vellum — longform writing, worldbuilding, narrative design, and creative experiments
 		</button>
+		<span class="separator" aria-hidden="true">|</span>
+		<button
+			class="section-tab creative"
+			type="button"
+			aria-pressed="false"
+			aria-label="Nameless Harvestman — Creative project"
+			data-section="harvestman"
+		>
+			Nameless Harvestman
+		</button>
 		</nav>
 	</header>
 
@@ -118,6 +128,10 @@
 	.section-tab:hover,
 	.section-tab:focus-visible {
 		opacity: 1;
+	}
+
+	.section-tab + .section-tab {
+		margin-left: 0.35rem;
 	}
 
 	.section-tab:focus-visible {
