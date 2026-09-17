@@ -3,4 +3,46 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout>
+	<main class="section-content">
+		<section id="home-panel" data-section-panel="home">
+			<h1>Home</h1>
+		</section>
+
+		<section
+			id="personal-panel"
+			data-section-panel="personal"
+			hidden
+		>
+			<h1>Personal technical projects</h1>
+		</section>
+
+		<section
+			id="uiuc-panel"
+			data-section-panel="uiuc"
+			hidden
+		>
+			<h1>UIUC-related technical projects</h1>
+		</section>
+
+		<section
+			id="creative-panel"
+			data-section-panel="creative"
+			hidden
+		>
+			<h1>Creative projects</h1>
+		</section>
+	</main>
 </Layout>
+
+<style>
+	.section-content {
+		width: min(76rem, calc(100% - 2.6rem));
+		margin: 3rem auto;
+	}
+
+	h1 {
+		margin: 0;
+		font-size: clamp(2rem, 5vw, 4rem);
+		font-weight: 500;
+	}
+</style>

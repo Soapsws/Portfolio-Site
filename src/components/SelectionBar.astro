@@ -1,12 +1,65 @@
-<header class="selection-bar">
-	<nav aria-label="Project and showcase navigation">
-		<slot />
-	</nav>
-</header>
+<div class="selection-control">
+	<header class="selection-bar">
+		<nav class="selector-scroll" aria-label="Portfolio projects and sections">
+		<button
+			class="section-tab home"
+			type="button"
+			aria-pressed="true"
+			aria-label="Origin — Home"
+			data-section="home"
+		>
+			Origin — an extended introduction to Yichen's technical and creative portfolio
+		</button>
+		<span class="separator" aria-hidden="true">|</span>
+		<button
+			class="section-tab personal"
+			type="button"
+			aria-pressed="false"
+			aria-label="Signal — Personal technical projects"
+			data-section="personal"
+		>
+			Signal — a personal archive of systems experiments, prototypes, and engineering notes
+		</button>
+		<span class="separator" aria-hidden="true">|</span>
+		<button
+			class="section-tab uiuc"
+			type="button"
+			aria-pressed="false"
+			aria-label="Praxis — UIUC-related technical projects"
+			data-section="uiuc"
+		>
+			Praxis — UIUC research, coursework, collaborations, and technical investigations
+		</button>
+		<span class="separator" aria-hidden="true">|</span>
+		<button
+			class="section-tab creative"
+			type="button"
+			aria-pressed="false"
+			aria-label="Vellum — Creative projects"
+			data-section="creative"
+		>
+			Vellum — longform writing, worldbuilding, narrative design, and creative experiments
+		</button>
+		</nav>
+	</header>
+
+	<div class="legend-row" aria-label="Section color legend">
+		<span class="legend-key">KEY:</span>
+		<div class="section-legend">
+			<span class="home">Home</span>
+			<span class="personal">Personal technical</span>
+			<span class="uiuc">UIUC technical</span>
+			<span class="creative">Creative</span>
+		</div>
+	</div>
+</div>
 
 <style>
-	.selection-bar {
+	.selection-control {
 		width: 100%;
+	}
+
+	.selection-bar {
 		min-height: 4.5rem;
 		margin: 0 auto;
 		box-sizing: border-box;
@@ -14,19 +67,146 @@
 		border-radius: 1rem;
 		background: rgba(10, 12, 16, 0.35);
 		padding: 0.8rem 1.6rem;
-		overflow-x: auto;
 	}
 
-	nav {
+	.selector-scroll {
 		display: flex;
 		align-items: center;
-		gap: 0.5rem;
-		min-width: max-content;
+		gap: 0.8rem;
+		width: 100%;
+		overflow-x: auto;
+		scroll-behavior: smooth;
+		scrollbar-color: #4a4e57 rgba(10, 12, 16, 0.35);
+		scrollbar-width: thin;
+		min-width: 0;
+		padding-bottom: 0.25rem;
+	}
+
+	.selector-scroll::-webkit-scrollbar {
+		height: 0.35rem;
+	}
+
+	.selector-scroll::-webkit-scrollbar-track {
+		background: rgba(10, 12, 16, 0.35);
+		border-radius: 999px;
+	}
+
+	.selector-scroll::-webkit-scrollbar-thumb {
+		background: #4a4e57;
+		border-radius: 999px;
+	}
+
+	.selector-scroll::-webkit-scrollbar-thumb:hover {
+		background: #626773;
+	}
+
+	.section-tab {
+		flex: 0 0 auto;
+		border: 0;
+		padding: 0.25rem 0;
+		background: transparent;
+		font: inherit;
+		font-size: 0.9rem;
+		letter-spacing: 0.01em;
+		white-space: nowrap;
+		cursor: pointer;
+		opacity: 0.7;
+		transition: opacity 0.2s ease;
+	}
+
+	.section-tab[aria-pressed='true'],
+	.section-tab:hover,
+	.section-tab:focus-visible {
+		opacity: 1;
+	}
+
+	.section-tab:focus-visible {
+		outline: 1px solid currentColor;
+		outline-offset: 4px;
+		border-radius: 0.2rem;
+	}
+
+	.separator {
+		flex: 0 0 auto;
+		color: #6d6e73;
+	}
+
+	.legend-row,
+	.section-legend {
+		display: flex;
+		align-items: center;
+	}
+
+	.legend-row {
+		justify-content: center;
+		gap: 0.9rem;
+		padding-top: 0.55rem;
+	}
+
+	.legend-key {
+		border: 1px solid rgba(232, 229, 223, 0.35);
+		border-radius: 0.3rem;
+		padding: 0.15rem 0.35rem;
+		color: #aaa7a0;
+		font-size: 0.58rem;
+		letter-spacing: 0.08em;
+	}
+
+	.section-legend {
+		gap: 0.9rem;
+		font-size: 0.62rem;
+		white-space: nowrap;
+	}
+
+	.home {
+		color: #79a6c8;
+	}
+
+	.personal {
+		color: #d7d5d0;
+	}
+
+	.uiuc {
+		color: #c89063;
+	}
+
+	.creative {
+		color: #7fa98b;
 	}
 
 	@media (max-width: 800px) {
-		.selection-bar {
+		.selection-control {
 			width: calc(100% - 2rem);
+		}
+
+		.legend-row {
+			justify-content: flex-start;
+			overflow-x: auto;
 		}
 	}
 </style>
+
+<script>
+	const tabs = [...document.querySelectorAll<HTMLButtonElement>('.section-tab')];
+	const panels = [...document.querySelectorAll<HTMLElement>('[data-section-panel]')];
+
+	function selectSection(section: string) {
+		const selectedTab = tabs.find((tab) => tab.dataset.section === section);
+
+		if (!selectedTab) return;
+
+		for (const tab of tabs) {
+			tab.setAttribute('aria-pressed', String(tab === selectedTab));
+		}
+
+		for (const panel of panels) {
+			panel.hidden = panel.dataset.sectionPanel !== section;
+		}
+
+		selectedTab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+	}
+
+	for (const tab of tabs) {
+		tab.addEventListener('click', () => selectSection(tab.dataset.section ?? 'home'));
+	}
+</script>
